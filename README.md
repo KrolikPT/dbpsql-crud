@@ -20,6 +20,6 @@ query = """
             UPDATE hy_users SET banned = %s WHERE nickname = %s; 
         """
 
-values = [False, "Krolik"]
+values = [False, "John Doe"]
 
 Database.update(query, values)
