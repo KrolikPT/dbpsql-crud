@@ -8,7 +8,7 @@ from database import Database
 
 ### EXAMPLE: SELECT
 query = """ 
-            SELECT * FROM hy_users; 
+            SELECT * FROM table; 
         """
 
 result = Database.select(query)
@@ -17,9 +17,9 @@ print(result)
 
 ### EXAMPLE: INSERT UPDATE DELETE
 query = """ 
-            UPDATE hy_users SET banned = %s WHERE nickname = %s; 
+            UPDATE table SET nickname = %s WHERE id = %s; 
         """
 
-values = [False, "John Doe"]
+values = ["John Doe", 1]
 
 Database.update(query, values)
