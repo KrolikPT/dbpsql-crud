@@ -1,5 +1,8 @@
 # CRUD to use with PostgreSQL
 
+## REQUIREMENTS
+pip install psycopg2    
+
 ## USAGE
 from database import Database
 
