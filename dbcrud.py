@@ -1,10 +1,11 @@
 import psycopg2
 
-##########################################################
-# DATABASE ACCESS
-##########################################################
+
 class InsertUpdateDelete:
 
+    ##########################################################
+    # INSERT, UPDATE AND DELETE 
+    ##########################################################
     def __init__(self, query, values):
         try:
             with Crud.db_connection() as conn:
@@ -15,6 +16,10 @@ class InsertUpdateDelete:
         
 
 class Crud:
+
+    ##########################################################
+    # DATABASE ACCESS
+    ##########################################################
     def db_connection():
         con = psycopg2.connect(
                         user = "root",
@@ -25,6 +30,9 @@ class Crud:
         return con
 
 
+    ##########################################################
+    # SELECT
+    ##########################################################
     def select(query, values = None):
         try:
             with Crud.db_connection() as conn:
@@ -36,13 +44,22 @@ class Crud:
             return error
 
 
+    ##########################################################
+    # INSERT
+    ##########################################################
+    def insert(query, values):   
+        InsertUpdateDelete(query, values)
+
+
+    ##########################################################
+    # UPDATE
+    ##########################################################
     def update(query, values):
         InsertUpdateDelete(query, values)
 
 
-    def insert(query, values):
-        InsertUpdateDelete(query, values)
-
-
+    ##########################################################
+    # DELETE
+    ##########################################################
     def delete(query, values):
         InsertUpdateDelete(query, values)
