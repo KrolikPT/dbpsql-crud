@@ -6,7 +6,7 @@ pip install psycopg2
 ## USAGE
 from database import Database
 
-### SELECT
+### EXAMPLE: SELECT
 query = """ 
             SELECT * FROM hy_users; 
         """
@@ -15,7 +15,7 @@ result = Database.select(query)
 
 print(result)
 
-### INSERT UPDATE DELETE
+### EXAMPLE: INSERT UPDATE DELETE
 query = """ 
             UPDATE hy_users SET banned = %s WHERE nickname = %s; 
         """
