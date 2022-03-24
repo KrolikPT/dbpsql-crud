@@ -7,8 +7,9 @@ from database import Database
 query = """ 
             SELECT * FROM hy_users; 
         """
-        
+
 result = Database.select(query)
+
 print(result)
 
 ### INSERT UPDATE DELETE
@@ -17,4 +18,5 @@ query = """
         """
 
 values = [False, "Krolik"]
+
 Database.update(query, values)
