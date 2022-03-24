@@ -11,7 +11,7 @@ query = """
             SELECT * FROM table; 
         """
 
-result = Database.select(query)
+result = Crud.select(query)
 
 print(result)
 
@@ -22,7 +22,7 @@ query = """
 
 values = [1]
 
-result = Database.select(query, values)
+result = Crud.select(query, values)
 
 print(result)
 
@@ -33,4 +33,4 @@ query = """
 
 values = ["John Doe", 1]
 
-Database.update(query, values)
+Crud.update(query, values)
