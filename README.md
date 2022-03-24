@@ -4,7 +4,7 @@
 pip install psycopg2    
 
 ## USAGE
-from database import Database
+from dbcrud import Crud
 
 ### EXAMPLE: SELECT
 query = """ 

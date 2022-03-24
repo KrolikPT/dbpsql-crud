@@ -14,7 +14,7 @@ class InsertUpdateDelete:
             return error
         
 
-class Database:
+class Crud:
     def db_connection():
         con = psycopg2.connect(
                         user = "root",
