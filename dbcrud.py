@@ -1,4 +1,4 @@
-import psycopg2, os
+import psycopg2
 
 ##########################################################
 # DATABASE ACCESS
@@ -7,7 +7,7 @@ class InsertUpdateDelete:
 
     def __init__(self, query, values):
         try:
-            with Database.db_connection() as conn:
+            with Crud.db_connection() as conn:
                 with conn.cursor() as cursor:
                     cursor.execute(query, values)
         except (Exception, psycopg2.DatabaseError) as error:
@@ -27,7 +27,7 @@ class Crud:
 
     def select(query, values = None):
         try:
-            with Database.db_connection() as conn:
+            with Crud.db_connection() as conn:
                 with conn.cursor() as cursor:
                     cursor.execute(query, values)
                     result = cursor.fetchall()
