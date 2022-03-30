@@ -1,65 +1,67 @@
 import psycopg2
 
 
-class InsertUpdateDelete:
+##########################################################
+# DATABASE ACCESS
+##########################################################
+def db_connection():
+    con = psycopg2.connect(
+        user="root",
+        password="",
+        host="localhost",
+        port="5432",
+        database="test")
+    return con
 
+
+class InsertUpdateDelete:
+    
     ##########################################################
     # INSERT, UPDATE AND DELETE 
     ##########################################################
     def __init__(self, query, values):
         try:
-            with Crud.db_connection() as conn:
+            with db_connection() as conn:
                 with conn.cursor() as cursor:
                     cursor.execute(query, values)
         except (Exception, psycopg2.DatabaseError) as error:
-            return error
-        
+            print(error)
+            exit()
+
 
 class Crud:
-
-    ##########################################################
-    # DATABASE ACCESS
-    ##########################################################
-    def db_connection():
-        con = psycopg2.connect(
-                        user = "root",
-                        password = "",
-                        host = "localhost",
-                        port = "5432",
-                        database = "test")
-        return con
-
-
+    
     ##########################################################
     # SELECT
     ##########################################################
-    def select(query, values = None):
+    def __init__(self, query, values):
+        self.values = values
+        self.query = query
+
+    def select(self):
         try:
-            with Crud.db_connection() as conn:
+            with db_connection() as conn:
                 with conn.cursor() as cursor:
-                    cursor.execute(query, values)
+                    cursor.execute(self.query, self.values)
                     result = cursor.fetchall()
             return result
         except (Exception, psycopg2.DatabaseError) as error:
             return error
-
-
+    
     ##########################################################
     # INSERT
     ##########################################################
-    def insert(query, values):   
-        InsertUpdateDelete(query, values)
-
-
+    def insert(self):
+        InsertUpdateDelete(self.query, self.values)
+    
     ##########################################################
     # UPDATE
     ##########################################################
-    def update(query, values):
-        InsertUpdateDelete(query, values)
-
-
+    def update(self):
+        InsertUpdateDelete(self.query, self.values)
+    
     ##########################################################
     # DELETE
     ##########################################################
-    def delete(query, values):
-        InsertUpdateDelete(query, values)
+    def delete(self):
+        InsertUpdateDelete(self.query, self.values)
