@@ -16,52 +16,39 @@ def db_connection():
 
 class InsertUpdateDelete:
     
-    ##########################################################
-    # INSERT, UPDATE AND DELETE 
-    ##########################################################
     def __init__(self, query, values):
+        self.query = query
+        self.values = values
+    
         try:
             with db_connection() as conn:
                 with conn.cursor() as cursor:
-                    cursor.execute(query, values)
+                    cursor.execute(self.query, self.values)
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             exit()
 
 
 class Crud:
-    
-    ##########################################################
-    # SELECT
-    ##########################################################
-    def __init__(self, query, values):
-        self.values = values
-        self.query = query
 
-    def select(self):
+    def select(query, values):
         try:
             with db_connection() as conn:
                 with conn.cursor() as cursor:
-                    cursor.execute(self.query, self.values)
+                    cursor.execute(query, values)
                     result = cursor.fetchall()
             return result
         except (Exception, psycopg2.DatabaseError) as error:
             return error
     
-    ##########################################################
-    # INSERT
-    ##########################################################
-    def insert(self):
-        InsertUpdateDelete(self.query, self.values)
     
-    ##########################################################
-    # UPDATE
-    ##########################################################
-    def update(self):
-        InsertUpdateDelete(self.query, self.values)
+    def insert(query, values):
+        InsertUpdateDelete(query, values)
+        
     
-    ##########################################################
-    # DELETE
-    ##########################################################
-    def delete(self):
-        InsertUpdateDelete(self.query, self.values)
+    def update(query, values):
+        InsertUpdateDelete(query, values)
+        
+        
+    def delete(query, values):
+        InsertUpdateDelete(query, values)
